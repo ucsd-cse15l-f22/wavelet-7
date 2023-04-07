@@ -7,10 +7,23 @@ class Handler1 implements URLHandler {
     // The one bit of state on the server: a number that will be manipulated by
     // various requests.
     List<String> stringList = new ArrayList<String>();
+    List<String> foundList = new ArrayList<String>();
 
     public String handleRequest(URI url) {
         if (url.getPath().equals("/")) {
             return String.format("Genevieve's List: %s \n", stringList);
+
+        } else if (url.getPath().equals("/search")) {
+            foundList.clear();
+            String[] parameters = url.getQuery().split("=");
+            if (parameters[0].equals("s")) {
+                for (int i = 0; i < stringList.size(); i++) {
+                    if (stringList.get(i).contains(parameters[1])) {
+                        foundList.add(stringList.get(i));
+                    }
+                }
+                return String.format("The strings %s contain %s \n", foundList, parameters[1]);
+            }
         } else {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add")) {
@@ -22,6 +35,7 @@ class Handler1 implements URLHandler {
             }
             return "404 Not Found!";
         }
+        return null;
     }
 }
 
