@@ -22,7 +22,7 @@ class Handler1 implements URLHandler {
                         foundList.add(stringList.get(i));
                     }
                 }
-                return String.format("The strings %s contain %s \n", foundList, parameters[1]);
+                return String.format("The strings in this list: %s contain %s \n", foundList, parameters[1]);
             }
         } else {
             System.out.println("Path: " + url.getPath());
