@@ -10,14 +10,14 @@ class Handler1 implements URLHandler {
 
     public String handleRequest(URI url) {
         if (url.getPath().equals("/")) {
-            return String.format("Genevieve's List: %s", stringList);
+            return String.format("Genevieve's List: %s \n", stringList);
         } else {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("s")) {
                     stringList.add(parameters[1]);
-                    return String.format("Added %s! It's now %s", parameters[1], stringList);
+                    return String.format("Added %s! It's now %s \n", parameters[1], stringList);
                 }
             }
             return "404 Not Found!";
